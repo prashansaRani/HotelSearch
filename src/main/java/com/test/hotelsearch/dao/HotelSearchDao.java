@@ -20,25 +20,22 @@ public interface HotelSearchDao extends JpaRepository<Hotel, String> {
 	public Optional<List<Hotel>> getAllHotels() throws SQLException;
 
 	@Modifying
-	// @Query(value="insert into
-	// hotel(hotel_id,hotel_name,hotel_city,roomsAvailability,amenities,roomCost)
-	// values (:id,:name,:city,:availability,:amenities,:cost)",nativeQuery=true)
 	@Query(value = "insert into hotel(hotel_id,hotel_name,hotel_city,rooms_availability,room_amenities,room_cost) values (:id,:name,:city,:availbility,:amenities,:cost)", nativeQuery = true)
 	public void insertHotel(@Param("id") String id, @Param("name") String name, @Param("city") String city,
 			@Param("availbility") String availbility, @Param("amenities") String amenities, @Param("cost") int cost)
 			throws SQLException;
 
-//	@Modifying
-//	@Query(value="update hotel set hotel_name=:name, hotel_city=:city, roomsAvailability=:roomsAvailability, amenities=:amenities, roomCost=:roomCost where hotel_id=:id",nativeQuery=true)
-//	public void updateHotel(
-//			@Param("id") String id,
-//			@Param("name") String name,
-//			@Param("city") String city,
-//			@Param("roomsAvailability") String roomsAvailability,
-//			@Param("amenities") String amenities,
-//			@Param("roomCost") int roomCost
-//			) throws SQLException;
-//	
+	@Modifying
+	@Query(value="update hotel set hotel_name=:name, hotel_city=:city, rooms_availability=:rooms_availability, room_amenities=:room_amenities, room_cost=:room_cost where hotel_id=:id",nativeQuery=true)
+	public void updateHotel(
+			@Param("id") String id,
+			@Param("name") String name,
+			@Param("city") String city,
+			@Param("rooms_availability") String rooms_availability,
+			@Param("room_amenities") String room_amenities,
+			@Param("room_cost") int room_cost
+			) throws SQLException;
+	
 	@Modifying
 	@Query(value = "delete from hotel where hotel_id=:id", nativeQuery = true)
 	public void deleteHotel(@Param("id") String id) throws SQLException;

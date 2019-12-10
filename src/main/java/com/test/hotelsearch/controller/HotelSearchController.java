@@ -75,18 +75,18 @@ public class HotelSearchController {
 	 *
 	 */
 
-//	@PostMapping(value="/updatehotel",consumes=MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<String> updateHotel(@RequestBody HotelVO hotelVo) {
-//		ResponseEntity<String> response = null;
-//		try {
-//			service.updateHotel(hotelVo.getHotelId(),hotelVo.getHotelName(),hotelVo.getHotelCity(), hotelVo.getRoomsAvailability(),hotelVo.getAmenities(),hotelVo.getRoomCost());
-//			response = new ResponseEntity<String>("Succesfully Updated Hotel = "+hotelVo.getHotelId()+" "+hotelVo.getHotelName(), HttpStatus.OK);
-//		} catch (HotelSearchException e) {
-//			return new ResponseEntity<>("Couldnot Update",HttpStatus.valueOf(500));
-//		}
-//		return response;
-//	}
-//	
+	@PostMapping(value="/updatehotel",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateHotel(@RequestBody HotelVO hotelVo) {
+		ResponseEntity<String> response = null;
+		try {
+			service.updateHotel(hotelVo.getHotelId(),hotelVo.getHotelName(),hotelVo.getHotelCity(), hotelVo.getRoomsAvailability(),hotelVo.getAmenities(),hotelVo.getRoomCost());
+			response = new ResponseEntity<String>("Succesfully Updated Hotel = "+hotelVo.getHotelId()+" "+hotelVo.getHotelName(), HttpStatus.OK);
+		} catch (HotelSearchException e) {
+			return new ResponseEntity<>("Couldnot Update",HttpStatus.valueOf(500));
+		}
+		return response;
+	}
+	
 	/*
 	 * deleteHotel takes Hotel ID input and returns confirmation message if delete
 	 * operation was successful, else error message
@@ -106,7 +106,7 @@ public class HotelSearchController {
 	}
 
 	/*
-	 * searchStudentByIdorName takes Hotel Id and Name as input and returns all the
+	 * searchHotelByIdorName takes Hotel Id and Name as input and returns all the
 	 * hotels who has the input ID or name pattern in them, else empty list
 	 *
 	 */

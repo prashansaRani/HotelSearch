@@ -10,8 +10,8 @@ public interface HotelSearchService {
 
 	public void insertHotel(HotelVO hotel) throws HotelSearchException;
 
-//	public void updateHotel(String id, String newname, String newCity, String newavailability, String newamenities, int newcost) throws HotelSearchException;
-//	
+	public void updateHotel(String id, String newname, String newCity, String newavailability, String newamenities, int newcost) throws HotelSearchException;
+	
 	public void deleteHotel(String id) throws HotelSearchException;
 
 	public List<HotelVO> searchByIdorName(String id, String name) throws HotelSearchException;

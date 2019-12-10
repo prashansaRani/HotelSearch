@@ -58,42 +58,42 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		}
 	}
 
-//	@Override
-//	public void updateHotel(String id, String newname, String newCity, String newavailability, String newamenities, int newcost) throws HotelSearchException {
-//		                    
-//		try {
-//			Optional<Hotel> hotel = dao.findById(id);
-//			//StudentVO updateStudent = new StudentVO();
-//			Hotel ht = new Hotel();
-//			if(hotel.isPresent()) {
-//				
-//				ht = hotel.get();
-//				if(newname.length() == 0)
-//					newname = ht.getHotelName();
-//				if(newCity.length() == 0)
-//					newCity = ht.getHotelCity();
-//				if(newavailability == null)
-//					newavailability = ht.getRoomsAvailability();
-//				if(newamenities == null)
-//					newamenities = ht.getAmenities();				
-//				if((int)newcost == 0)
-//					newcost = ht.getRoomCost();
-//				
-//			}else {
-//			
-//				throw new HotelSearchException("Hotel Not Found");
-//			}
-//			
-//			dao.updateHotel(id, newname, newCity, newavailability, newamenities, newcost);
-//			
-//		} catch (Exception e) {
-//			logger.info("Exception Occured : {}",e.getMessage());
-//			logger.error("Exception: {}",e);
-//			throw new HotelSearchException(e);
-//		}
-//		
-//	}
-//
+	@Override
+	public void updateHotel(String id, String newname, String newCity, String newavailability, String newamenities, int newcost) throws HotelSearchException {
+		                    
+		try {
+			Optional<Hotel> hotel = dao.findById(id);
+			//StudentVO updateStudent = new StudentVO();
+			Hotel ht = new Hotel();
+			if(hotel.isPresent()) {
+				
+				ht = hotel.get();
+				if(newname.length() == 0)
+					newname = ht.getHotelName();
+				if(newCity.length() == 0)
+					newCity = ht.getHotelCity();
+				if(newavailability == null)
+					newavailability = ht.getRoomsAvailability();
+				if(newamenities == null)
+					newamenities = ht.getAmenities();				
+				if((int)newcost == 0)
+					newcost = ht.getRoomCost();
+				
+			}else {
+			
+				throw new HotelSearchException("Hotel Not Found");
+			}
+			
+			dao.updateHotel(id, newname, newCity, newavailability, newamenities, newcost);
+			
+		} catch (Exception e) {
+			logger.info("Exception Occured : {}",e.getMessage());
+			logger.error("Exception: {}",e);
+			throw new HotelSearchException(e);
+		}
+		
+	}
+
 	@Override
 	public void deleteHotel(String id) throws HotelSearchException {
 
