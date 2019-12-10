@@ -6,25 +6,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hotel")
+@Table(name = "hotel")
 public class Hotel {
 	@Id
-	@Column(name="hotel_id")
+	@Column(name = "hotel_id")
 	private String hotelId;
 
-	@Column(name="hotel_name")
+	@Column(name = "hotel_name")
 	private String hotelName;
-	
-	@Column(name="hotel_city")
+
+	@Column(name = "hotel_city")
 	private String hotelCity;
 
-	@Column(name="rooms_availability")
+	@Column(name = "rooms_availability")
 	private String roomsAvailability;
 
-	@Column(name="room_amenities")
+	@Column(name = "room_amenities")
 	private String amenities;
-	
-	@Column(name="room_cost")
+
+	@Column(name = "room_cost")
 	private int roomCost;
 
 	public String getHotelId() {
@@ -42,7 +42,6 @@ public class Hotel {
 	public void setHotelName(String hotelName) {
 		this.hotelName = hotelName;
 	}
-	
 
 	public String getHotelCity() {
 		return hotelCity;
@@ -75,8 +74,5 @@ public class Hotel {
 	public void setRoomCost(int roomCost) {
 		this.roomCost = roomCost;
 	}
-
-	
-	
 
 }

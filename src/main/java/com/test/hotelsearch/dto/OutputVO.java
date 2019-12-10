@@ -2,8 +2,6 @@ package com.test.hotelsearch.dto;
 
 import java.util.List;
 
-
-
 public class OutputVO {
 	List<HotelVO> hotelsList;
 
@@ -14,6 +12,5 @@ public class OutputVO {
 	public void setHotelsList(List<HotelVO> hotelsList) {
 		this.hotelsList = hotelsList;
 	}
-	
 
 }

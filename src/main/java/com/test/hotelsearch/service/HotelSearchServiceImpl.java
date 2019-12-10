@@ -14,31 +14,32 @@ import com.test.hotelsearch.dto.HotelVO;
 import com.test.hotelsearch.exception.HotelSearchException;
 import com.test.hotelsearch.model.Hotel;
 
-
 @Service
-public class HotelSearchServiceImpl implements HotelSearchService{
-private static org.slf4j.Logger logger = LoggerFactory.getLogger(HotelSearchServiceImpl.class); 
-	
+public class HotelSearchServiceImpl implements HotelSearchService {
+	private static org.slf4j.Logger logger = LoggerFactory.getLogger(HotelSearchServiceImpl.class);
+
 	@Autowired
 	private HotelSearchDao dao;
-	
+
 	@Override
-	public List<HotelVO> getAllHotels() throws HotelSearchException{
+	public List<HotelVO> getAllHotels() throws HotelSearchException {
 		Optional<List<Hotel>> hotels = Optional.empty();
 		List<HotelVO> allHotels = new ArrayList<>();
 		int size = 0;
-			try {
-				hotels = dao.getAllHotels();
-				if(hotels.isPresent()){
-					allHotels=hotels.get().stream().
-				map(a->new HotelVO(a.getHotelId(),a.getHotelName(),a.getHotelCity(),a.getRoomsAvailability(),a.getAmenities(),a.getRoomCost())).collect(Collectors.toList());
+		try {
+			hotels = dao.getAllHotels();
+			if (hotels.isPresent()) {
+				allHotels = hotels.get().stream()
+						.map(a -> new HotelVO(a.getHotelId(), a.getHotelName(), a.getHotelCity(),
+								a.getRoomsAvailability(), a.getAmenities(), a.getRoomCost()))
+						.collect(Collectors.toList());
 			}
 			size = allHotels.size();
-			logger.info("No of Hotels: {}",size);
-			
+			logger.info("No of Hotels: {}", size);
+
 		} catch (Exception e) {
-			logger.info("Exception Occured : {}",e.getMessage());
-			logger.error("Exception: {}",e);
+			logger.info("Exception Occured : {}", e.getMessage());
+			logger.error("Exception: {}", e);
 			throw new HotelSearchException(e);
 		}
 		return allHotels;
@@ -46,13 +47,14 @@ private static org.slf4j.Logger logger = LoggerFactory.getLogger(HotelSearchServ
 
 	@Override
 	public void insertHotel(HotelVO hotelVo) throws HotelSearchException {
-		
-		try {			
-				dao.insertHotel(hotelVo.getHotelId(), hotelVo.getHotelName(), hotelVo.getHotelCity(), hotelVo.getRoomsAvailability(), hotelVo.getAmenities(), hotelVo.getRoomCost());
+
+		try {
+			dao.insertHotel(hotelVo.getHotelId(), hotelVo.getHotelName(), hotelVo.getHotelCity(),
+					hotelVo.getRoomsAvailability(), hotelVo.getAmenities(), hotelVo.getRoomCost());
 		} catch (Exception e) {
-			logger.info("Exception Occured : {}",e.getMessage());
-			logger.error("Exception: {}",e);
-				throw new HotelSearchException(e);
+			logger.info("Exception Occured : {}", e.getMessage());
+			logger.error("Exception: {}", e);
+			throw new HotelSearchException(e);
 		}
 	}
 
@@ -94,41 +96,38 @@ private static org.slf4j.Logger logger = LoggerFactory.getLogger(HotelSearchServ
 //
 	@Override
 	public void deleteHotel(String id) throws HotelSearchException {
-		
+
 		try {
 			dao.deleteHotel(id);
 		} catch (Exception e) {
-			logger.info("Exception Occured : {}",e.getMessage());
-			logger.error("Exception: {}",e);
+			logger.info("Exception Occured : {}", e.getMessage());
+			logger.error("Exception: {}", e);
 			throw new HotelSearchException(e);
 		}
 	}
 
 	@Override
 	public List<HotelVO> searchByIdorName(String id, String name) throws HotelSearchException {
-		
+
 		Optional<List<Hotel>> hotels = Optional.empty();
 		List<HotelVO> allHotels = new ArrayList<>();
 		int size = 0;
-			try {
-				hotels = dao.searchByIdorName(id, name);
-				if(hotels.isPresent()){
-					allHotels=hotels.get().stream().
-					map(a->new HotelVO(a.getHotelId(),a.getHotelName(),a.getHotelCity(), a.getRoomsAvailability(),a.getAmenities(),a.getRoomCost())).collect(Collectors.toList());
-				}
-				size = allHotels.size();
-				logger.info("Hotels found : {}",size);
-			}catch (Exception e) {
-				logger.info("Exception Occured : {}",e.getMessage());
-				logger.error("Exception: {}",e);
-				throw new HotelSearchException(e);
+		try {
+			hotels = dao.searchByIdorName(id, name);
+			if (hotels.isPresent()) {
+				allHotels = hotels.get().stream()
+						.map(a -> new HotelVO(a.getHotelId(), a.getHotelName(), a.getHotelCity(),
+								a.getRoomsAvailability(), a.getAmenities(), a.getRoomCost()))
+						.collect(Collectors.toList());
+			}
+			size = allHotels.size();
+			logger.info("Hotels found : {}", size);
+		} catch (Exception e) {
+			logger.info("Exception Occured : {}", e.getMessage());
+			logger.error("Exception: {}", e);
+			throw new HotelSearchException(e);
 		}
 		return allHotels;
 	}
-	
-	
-	
-	
-
 
 }

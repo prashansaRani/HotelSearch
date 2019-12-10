@@ -18,68 +18,63 @@ import com.test.hotelsearch.dto.OutputVO;
 import com.test.hotelsearch.exception.HotelSearchException;
 import com.test.hotelsearch.service.HotelSearchService;
 
-
 @RestController
 @RequestMapping("/dashboard")
 public class HotelSearchController {
 	@Autowired
 	private HotelSearchService service;
-	
+
 	/*
 	 * 
-	 * A function to view all hotels present in the System
-	 * Takes no parameter, returns list of all the hotels
-	 * if no students returns empty list 
+	 * A function to view all hotels present in the System Takes no parameter,
+	 * returns list of all the hotels if no students returns empty list
 	 * 
-	 * */
-	
-	@GetMapping(value="/viewallhotels")
-	public ResponseEntity<OutputVO> getAllHotels(){
-		ResponseEntity<OutputVO> response = null; 
+	 */
+
+	@GetMapping(value = "/viewallhotels")
+	public ResponseEntity<OutputVO> getAllHotels() {
+		ResponseEntity<OutputVO> response = null;
 		OutputVO output = new OutputVO();
 		List<HotelVO> hotels = null;
 		try {
 			hotels = service.getAllHotels();
 			output.setHotelsList(hotels);
 			response = new ResponseEntity<OutputVO>(output, HttpStatus.OK);
-		}catch (HotelSearchException e) {
-			response = new ResponseEntity<>(output,HttpStatus.valueOf(500));
+		} catch (HotelSearchException e) {
+			response = new ResponseEntity<>(output, HttpStatus.valueOf(500));
 			return response;
 		}
 		return response;
-		
+
 	}
-	
-	
+
 	/*
-	 * insertHotel takes Hotel (HotelVO) Object as input and
-	 * returns confirmation message if insert operation was successful, else 
-	 * error message
+	 * insertHotel takes Hotel (HotelVO) Object as input and returns confirmation
+	 * message if insert operation was successful, else error message
 	 *
-	 * */
-	
-	
-	@PostMapping(value="/addhotel",consumes=MediaType.APPLICATION_JSON_VALUE)
+	 */
+
+	@PostMapping(value = "/addhotel", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insertHotel(@RequestBody HotelVO hotelVo) {
 		ResponseEntity<String> response = null;
 		try {
 			service.insertHotel(hotelVo);
-			response = new ResponseEntity<String>("Succesfully Inserted hotel: HotelId= "+hotelVo.getHotelId()+" HotelName: "+hotelVo.getHotelName(), HttpStatus.OK);
+			response = new ResponseEntity<String>("Succesfully Inserted hotel: HotelId= " + hotelVo.getHotelId()
+					+ " HotelName: " + hotelVo.getHotelName(), HttpStatus.OK);
 		} catch (HotelSearchException e) {
 			System.out.println(e.getMsg());
-			return new ResponseEntity<>("Couldnot Insert, please check if the hotel_id already exists",HttpStatus.valueOf(500));
+			return new ResponseEntity<>("Couldnot Insert, please check if the hotel_id already exists",
+					HttpStatus.valueOf(500));
 		}
 		return response;
 	}
-	
+
 	/*
-	 * updateHotel takes Hotel (HotelVO) Object as input and
-	 * returns confirmation message if update operation was successful, else 
-	 * error message
+	 * updateHotel takes Hotel (HotelVO) Object as input and returns confirmation
+	 * message if update operation was successful, else error message
 	 *
-	 * */
-	
-	
+	 */
+
 //	@PostMapping(value="/updatehotel",consumes=MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<String> updateHotel(@RequestBody HotelVO hotelVo) {
 //		ResponseEntity<String> response = null;
@@ -93,36 +88,33 @@ public class HotelSearchController {
 //	}
 //	
 	/*
-	 * deleteHotel takes Hotel ID input and
-	 * returns confirmation message if delete operation was successful, else 
-	 * error message
+	 * deleteHotel takes Hotel ID input and returns confirmation message if delete
+	 * operation was successful, else error message
 	 *
-	 * */
-	
-	
-	@PostMapping(value="/deletehotel")
+	 */
+
+	@PostMapping(value = "/deletehotel")
 	public ResponseEntity<String> deleteHotel(@RequestParam("id") String id) {
 		ResponseEntity<String> response = null;
 		try {
 			service.deleteHotel(id);
-			response = new ResponseEntity<String>("Successfully Deleted Hotel = "+id, HttpStatus.OK);
+			response = new ResponseEntity<String>("Successfully Deleted Hotel = " + id, HttpStatus.OK);
 		} catch (HotelSearchException e) {
-			return new ResponseEntity<>("Couldnot delete",HttpStatus.valueOf(500));
+			return new ResponseEntity<>("Couldnot delete", HttpStatus.valueOf(500));
 		}
 		return response;
 	}
-	
-	
+
 	/*
-	 * searchStudentByIdorName takes Hotel Id and Name as input and
-	 * returns all the hotels who has the input ID or name pattern in them, else 
-	 * empty list
+	 * searchStudentByIdorName takes Hotel Id and Name as input and returns all the
+	 * hotels who has the input ID or name pattern in them, else empty list
 	 *
-	 * */
-	
-	@PostMapping(value="/searchhotelbyidorname")
-	public ResponseEntity<OutputVO> searchHotelByIdorName(@RequestParam("id") String id,@RequestParam("name") String name) {
-		
+	 */
+
+	@PostMapping(value = "/searchhotelbyidorname")
+	public ResponseEntity<OutputVO> searchHotelByIdorName(@RequestParam("id") String id,
+			@RequestParam("name") String name) {
+
 		OutputVO output = new OutputVO();
 		List<HotelVO> foundHotels = null;
 		ResponseEntity<OutputVO> response = null;
@@ -131,10 +123,9 @@ public class HotelSearchController {
 			output.setHotelsList(foundHotels);
 			response = new ResponseEntity<OutputVO>(output, HttpStatus.OK);
 		} catch (HotelSearchException e) {
-			return new ResponseEntity<>(output,HttpStatus.valueOf(500));
+			return new ResponseEntity<>(output, HttpStatus.valueOf(500));
 		}
 		return response;
 	}
-	
 
 }
